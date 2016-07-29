@@ -9,7 +9,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class PortfolioController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route(
+     *      "/",
+     *      name="portfolio_main"
+     * )
      * @Template()
      */
     public function indexAction()
@@ -20,7 +23,10 @@ class PortfolioController extends Controller
     }
 
     /**
-     * @Route("/projekty/")
+     * @Route(
+     *      "/projekty/",
+     *      name="portfolio_projects"
+     * )
      * @Template()
      */
     public function projectsAction()

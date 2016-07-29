@@ -13,6 +13,7 @@
         'bundles/portfolio/css/mainpage.css'
         'bundles/portfolio/assets/sliderparallax/css/parallax-slider.css'
         filter = 'cssrewrite'
+        output ='assets/css/compiled-main.css'
     %}
      <link rel="stylesheet" type="text/css" href="{{ asset_url }}">
     {% endstylesheets %}
@@ -51,8 +52,8 @@
                     <li class="scroll tech"><a href="#technologie">TECHNOLOGIE</a></li>
                     <li class="special scroll"><a href="#projekty">PROJEKTY</a></li>
                     <li class="scroll"><a href="#kontakt">KONTAKT</a></li>
-                    <li class="flag flag_pl flag-active"><a href="#"><img src="img/pl.png" alt="flaga polska" /> </a></li>
-                    <li class="flag flag_en"><a href="#"><img src="img/en.png" alt="flaga brytyjska" /></a></li>
+                    <li class="flag flag_pl flag-active"><a href="#"><img src="{{ asset('bundles/portfolio/img/pl.png') }}" /> </a></li>
+                    <li class="flag flag_en"><a href="#"><img src="{{ asset('bundles/portfolio/img/en.png') }}" alt="flaga brytyjska" /></a></li>
                 </ul>
             </div>
         </div>
@@ -76,7 +77,9 @@
                 </div>
 
                 <div class="col-md-6 col-xs-12">
-                    <img src="img/o-mnie.JPG" alt="Robert Saternus"/>
+                    {% image 'bundles/portfolio/img/o-mnie.JPG' %}
+                        <img src="{{ asset_url }}" alt="Robert Saternus" />
+                    {% endimage %}
                 </div>
             </div>
         </div>
@@ -93,22 +96,38 @@
                     <div class="col-md-6 col-xs-12 da-slide">
                         <h2>Front-end</h2>
                         <p>Swoje projekty koduję w zastosowaniu o najnowsze technologie, takie jak <span>HTML5, CSS3 czy JavaScript</span>. Dzięki czemu strony, które tworzę są zgodne z najnowszymi wytycznymi światowych organizacji oraz są przyjazne dla wyszukiwarek.</p>
-                        <div class="da-img button"><img class="img-responsive" src="img/html5-css-javascript.png" alt="html5 css3 javascript" /></div>
+                        <div class="da-img button">
+                            {% image 'bundles/portfolio/img/html5-css-javascript.png' %}
+                                 <img class="img-responsive" src="{{ asset_url }}" alt="html5 css3 javascript" />
+                            {% endimage %}
+                        </div>
                     </div>
                     <div class="da-slide">
                         <h2>Back-end</h2>
                         <p>Język <span>PHP</span> to technologia, którą fascynuję się najbardziej. Umożliwia mi tworzenie niezwykłych rzeczy w wirtualnym świecie a wykorzystanie frameworka <span> Symfony</span> umożliwia mi zadowolenie nawet najbardziej "niecierpliwych" klientów </p>
-                        <div class="da-img button"><img  class="img-responsive"  src="img/php.png" alt="PHP" /></div>
+                        <div class="da-img button">
+                            {% image 'bundles/portfolio/img/php.png' %}
+                                <img class="img-responsive" src="{{ asset_url }}" alt="PHP" />
+                            {% endimage %}
+                        </div>
                     </div>
                     <div class="da-slide">
                         <h2>Systemy CMS</h2>
                         <p>Specjalizuję się w systemie <span>Wordpress</span> i właśnie na tą platformę najchętniej wykonuję projekty od stron wizytówek po sklepy online. Natomiast jeżeli potrzebujesz bardziej złożonego sklepu internetowego, chętnie wykonam go na platformie <span>Prestashop</span>. Wszystko to pozwoli Ci na bardzo łatwe aktualizacje zawartości stworzonego serwisu, bez znajomości programowania</p>
-                        <div class="da-img"><img  class="img-responsive" src="img/wordpress.png" alt="CSM" /></div>
+                        <div class="da-img">
+                            {% image 'bundles/portfolio/img/wordpress.png' %}
+                                <img class="img-responsive" src="{{ asset_url }}" alt="CSM" />
+                            {% endimage %}
+                        </div>
                     </div>
                     <div class="da-slide">
                         <h2>Grafika</h2>
                         <p>Choć nie uważam się za grafika, to również zdarza mi się tworzenie szblonów jak i graficznych elementów na strony komercyjne. W tym celu wykorzystuję takie programy jak <span>Photoshop i Ilustrator</span></p>
-                        <div class="da-img"><img  class="img-responsive" src="img/photo_ilu.png" alt="photoshop&ilustrator" /></div>
+                        <div class="da-img">
+                            {% image 'bundles/portfolio/img/photo_ilu.png' %}
+                                <img class="img-responsive" src="{{ asset_url }}" alt="photoshop&ilustrator" />
+                            {% endimage %}
+                        </div>
                     </div>
                     <nav class="da-arrows">
                         <span class="da-arrows-prev"></span>
@@ -129,7 +148,9 @@
                 <!--PROJEKT I-->
                 <div class="row row1">
                     <div class="col-md-6 computer parallax_left">
-                        <img src="img/pidsthailand.jpg" alt="PIDS Thailand - szkoła nurkowania" class="img-responsive" />
+                        {% image 'bundles/portfolio/img/pidsthailand.jpg' %}
+                            <img class="img-responsive" src="{{ asset_url }}" alt="PIDS Thailand - szkoła nurkowania" />
+                        {% endimage %}
                     </div>
 
                     <div class="col-md-6 project_desc parallax_right">
@@ -157,7 +178,9 @@
                 <!--PROJEKT II-->
                 <div class="row row2">
                     <div class="col-md-6 col-md-push-6 parallax_right computer">
-                        <img src="img/freelancelot.jpg" alt="FreeLancelot - podróże freelancera" class="img-responsive" />
+                        {% image 'bundles/portfolio/img/freelancelot.jpg' %}
+                            <img class="img-responsive" src="{{ asset_url }}" alt="FreeLancelot - podróże freelancera" />
+                        {% endimage %}
                     </div>
 
                     <div class="col-md-6 col-md-pull-6 project_desc">
@@ -185,7 +208,9 @@
                 <!--PROJEKT III-->
                 <div class="row row3">
                     <div class="col-md-6 parallax_left computer">
-                        <img src="img/elektromaniak.jpg" alt="Projekt Elektromaniak.pl" class="img-responsive" />
+                        {% image 'bundles/portfolio/img/elektromaniak.jpg' %}
+                            <img class="img-responsive" src="{{ asset_url }}" alt="Projekt Elektromaniak.pl" />
+                        {% endimage %}
                     </div>
 
                     <div class="col-md-6 project_desc">
@@ -210,7 +235,9 @@
                 <!--PROJEKT IV-->
                 <div class="row row4">
                     <div class="col-md-6 col-md-push-6 parallax_right computer">
-                        <img src="img/bwhs_mocaps.jpg" alt="Projekt BWHS" class="img-responsive" />
+                        {% image 'bundles/portfolio/img/bwhs_mocaps.jpg' %}
+                            <img class="img-responsive" src="{{ asset_url }}" alt="Kancelaria Prawnicza BWHS" />
+                        {% endimage %}
                     </div>
 
                     <div class="col-md-6 col-md-pull-6 project_desc">
@@ -236,7 +263,9 @@
                 <!--PROJEKT V-->
                 <div class="row row5">
                     <div class="col-md-6 parallax_left computer">
-                        <img src="img/gosbud_mocaps.jpg" alt="Firma budowlana" class="img-responsive" />
+                        {% image 'bundles/portfolio/img/gosbud_mocaps.jpg' %}
+                            <img class="img-responsive" src="{{ asset_url }}" alt="Firma budowlana - GOS-BUD" />
+                        {% endimage %}
                     </div>
 
                     <div class="col-md-6 project_desc">
@@ -253,7 +282,7 @@
                     </div>
                 </div>
 
-                <a class="button bigger" href="projekty.html">Zobacz więcej moich realizacji</a>
+                <a class="button bigger" href="{{ path('portfolio_projects') }}">Zobacz więcej moich realizacji</a>
 
             </div>
         </div>
@@ -328,17 +357,10 @@
         'bundles/portfolio/js/transformico.js'
         'bundles/portfolio/js/jquery.bgswitcher.js'
         'bundles/portfolio/js/main_script.js'
-
+        output ='assets/js/compiled-main.js'
     %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
-    {#<script src="{{ asset('bundles/portfolio/js/jquery-2.1.3.min.js') }}"></script>#}
-    {#<script src="{{ asset('bundles/portfolio/js/bootstrap.min.js') }}"></script>#}
-    {#<script src="{{ asset('bundles/portfolio/js/pace.min.js') }}"></script>#}
-    {#<script src="{{ asset('bundles/portfolio/assets/sliderparallax/js/jquery.cslider.js') }}"></script>#}
-    {#<script src="{{ asset('bundles/portfolio/js/jquery.scrollTo-1.4.3.1-min.js') }}"></script>#}
-    {#<script src="{{ asset('bundles/portfolio/js/transformico.js') }}"></script>#}
-    {#<script src="{{ asset('bundles/portfolio/js/jquery.bgswitcher.js') }}"></script>#}
-    {#<script src="{{ asset('bundles/portfolio/js/main_script.js') }}"></script>#}
+
 {% endblock %}
 
