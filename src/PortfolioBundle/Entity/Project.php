@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="project")
+ * @ORM\HasLifecycleCallBacks
  */
 class Project{
 
@@ -22,6 +23,11 @@ class Project{
      * @ORM\Column(type="string", length=150, unique=true)
      */
     private $title;
+
+    /**
+     * @ORM\Column(type="string", length=150, unique=true)
+     */
+    private $slug;
 
     /**
      * @ORM\Column(type="text")
@@ -284,5 +290,40 @@ class Project{
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Project
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = \PortfolioBundle\Libs\Utils::sluggify($slug) ;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function preSave(){
+
+        if($this->slug === NULL){
+            $this->setSlug($this->getTitle());
+        }
     }
 }

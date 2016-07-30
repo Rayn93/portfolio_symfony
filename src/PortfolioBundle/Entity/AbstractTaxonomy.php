@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\MappedSuperclass
+ * @ORM\HasLifecycleCallBacks
  */
 abstract class AbstractTaxonomy{
 
@@ -108,4 +109,39 @@ abstract class AbstractTaxonomy{
         return $this->projects;
     }
 
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return AbstractTaxonomy
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = \PortfolioBundle\Libs\Utils::sluggify($slug);
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function preSave(){
+
+        if($this->slug === NULL){
+            $this->setSlug($this->getName());
+        }
+    }
 }

@@ -3,12 +3,12 @@
 namespace PortfolioBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
-//use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use PortfolioBundle\Entity\Category;
 
 
-class CategoriesFixtures extends AbstractFixture{
+class CategoriesFixtures extends AbstractFixture implements OrderedFixtureInterface{
 
 
     public function load(ObjectManager $manager)
@@ -28,9 +28,19 @@ class CategoriesFixtures extends AbstractFixture{
             $Category->setName($value);
 
             $manager->persist($Category);
+
+            $this->addReference('category_'.$key, $Category);
         }
 
         $manager->flush();
 
+    }
+
+    /**
+     * Get the order of this fixture
+     */
+    public function getOrder()
+    {
+        return 0;
     }
 }

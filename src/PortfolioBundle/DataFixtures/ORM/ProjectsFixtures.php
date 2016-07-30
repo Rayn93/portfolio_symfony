@@ -3,12 +3,12 @@
 namespace PortfolioBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
-//use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use PortfolioBundle\Entity\Project;
 
 
-class ProjectsFixtures extends AbstractFixture{
+class ProjectsFixtures extends AbstractFixture implements OrderedFixtureInterface{
 
 
     public function load(ObjectManager $manager)
@@ -49,7 +49,7 @@ class ProjectsFixtures extends AbstractFixture{
                 'title' => 'BWHS - Kancelaria adwokacka',
                 'content' => 'Strona BWHS to projekt stworzony dla kancelarii prawniczej. Całość oparta o system WordPress. Moim zadaniem było dostosowanie szablonu pod projekt graficzny dostarczony przez firmę web-bespokers.com. Dodatkowo również wykonałem wielojęzyczność serwisu oraz przeniesienie całej treści ze starej strony klienta.',
                 'thumbnail' => '/portfolio_symfony/web/app_dev.php/images/98855d6_bwhs_mocaps_1.jpg',
-                'category' => 'moje',
+                'category' => 'wizytowki',
                 'tags' => array('HTML 5', 'CSS 3', 'PHP', 'jQuery', 'Bootstrap', 'Wordpress', 'Genesis framework', 'Wielojęzyczność'),
                 'link' => 'http://web-programista.pl/bwhs/',
                 'publishedDate' => '2016-04-05 12:12:12',
@@ -59,23 +59,46 @@ class ProjectsFixtures extends AbstractFixture{
                 'title' => 'Firma budowlana GOS-BUD',
                 'content' => 'Projekt zrealizowany dla firmy budowlanej Gos-Bud z Sulejowa. Strona jest oparta o system zarządzania treścią Wordpress, co pozwala właścicielom strony na łatwą modyfikację treści oraz dodawanie nowych realizacji budowlanych do portfolia na stronie. Projekt bazujący na gotowym szablonie. Moim zadaniem było zaprojektować stronę oraz zmodyfikować szablon pod wymagania klienta.',
                 'thumbnail' => '/portfolio_symfony/web/app_dev.php/images/3703857_gosbud_mocaps_1.jpg',
-                'category' => 'moje',
+                'category' => 'wizytowki',
                 'tags' => array('HTML 5', 'CSS 3', 'JavaScript', 'Wordpress', 'Photoshop'),
-                'link' => 'http://web-programista.pl/bwhs/',
-                'publishedDate' => '2016-04-05 12:12:12',
+                'link' => 'http://gos-bud.com.pl/',
+                'publishedDate' => '2016-04-03 12:12:12',
                 'homePage' => true
             )
         );
 
-        foreach($TagsList  as $tag){
+        foreach($ProjectsList as $project){
 
-            $Tag = new Tags();
-            $Tag->setName($tag);
+            $Project = new Project();
 
-            $manager->persist($Tag);
+            $Project->setTitle($project['title'])
+                    ->setContent($project['content'])
+                    ->setThumbnail($project['thumbnail'])
+                    ->setLink($project['link'])
+                    ->setPublishedDate(new \DateTime($project['publishedDate']))
+                    ->setHomePage($project['homePage']);
+
+            $Project->setCategory($this->getReference('category_'.$project['category']));
+
+            foreach($project['tags'] as $tagName){
+                $Project->addTag($this->getReference('tag_'.$tagName));
+            }
+
+
+            $manager->persist($Project);
         }
 
         $manager->flush();
 
     }
+
+    /**
+     * Get the order of this fixture
+     */
+    public function getOrder()
+    {
+        return 1;
+    }
+
+
 }
