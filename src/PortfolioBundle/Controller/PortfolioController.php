@@ -15,10 +15,21 @@ class PortfolioController extends Controller
      * )
      * @Template()
      */
-    public function indexAction()
-    {
-        return array(
+    public function indexAction(){
 
+        $ProjectRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Project');
+
+        $qb = $ProjectRepo->getQueryBuilder(array(
+            'home' => 'home'
+        ));
+
+        $query = $qb->getQuery();
+
+        $projects = $query->getResult();
+
+
+        return array(
+            'projects' => $projects
         );
     }
 

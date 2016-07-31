@@ -145,142 +145,37 @@
                     <h2>Moje najnowsze <span>projekty</span></h2>
                 </div>
 
-                <!--PROJEKT I-->
-                <div class="row row1">
-                    <div class="col-md-6 computer parallax_left">
-                        {% image 'bundles/portfolio/img/pidsthailand.jpg' %}
-                            <img class="img-responsive" src="{{ asset_url }}" alt="PIDS Thailand - szkoła nurkowania" />
-                        {% endimage %}
+                {% for project in projects %}
+
+                <div class="row row{{ loop.index }}">
+                    <div class="col-md-6 computer {{  cycle(["parallax_right", "parallax_left"], loop.index) }} {{ cycle(["col-md-push-6", ""], loop.index) }}">
+                        {#{% image 'bundles/portfolio/img/pidsthailand.jpg' %}#}
+                        {#<img class="img-responsive" src="{{ asset_url }}" alt="{{ project.title }}"/>#}
+                        {#{% endimage %}#}
+                        <img class="img-responsive" src="{{ project.thumbnail }}" alt="{{ project.title }}"/>
                     </div>
 
-                    <div class="col-md-6 project_desc parallax_right">
-                        <h3>Centrum nurkowania w Tajlandii</h3>
-                        <p>Projekt dla szkoły nurkowania z Tajlandii. W rzeczywistości jest to połączenie strony firmowej, bazy wiedzy oraz sklepu internetowego. Całość oparta na systemie WordPress (system sklepowy: WooCommerce). Dodatkowo zaimplementowany został blog oraz forum dla pracowników i klientów. Odpowiadam za stworzenie serwisu, administrację oraz SEO.</p>
+                    <div class="col-md-6 project_desc {{ cycle(["col-md-pull-6", ""], loop.index)}}">
+                        <h3>{{ project.title }}</h3>
+
+                        <p>{{ project.content }}</p>
                         <ul>
-                            <li>HTML 5</li>
-                            <li>CSS 3</li>
-                            <li>PHP</li>
-                            <li>jQuery</li>
-                            <li>Wordpress</li>
-                            <li>WooCommerce</li>
-                            <li>Administracja</li>
-                            <li>SEO</li>
+                            {% for tag in project.tags %}
+                                <li>{{ tag.name }}</li>
+                            {% endfor %}
                         </ul>
-                        <a class="button" href="http://pidsthailand.com/" target="_blank"> Zobacz projekt </a>
+                        <a class="button" href="{{ project.link }}" target="_blank"> Zobacz projekt </a>
                     </div>
                 </div>
 
-                <div class="separator">
-                    <div class="mask"></div>
-                </div>
-
-
-                <!--PROJEKT II-->
-                <div class="row row2">
-                    <div class="col-md-6 col-md-push-6 parallax_right computer">
-                        {% image 'bundles/portfolio/img/freelancelot.jpg' %}
-                            <img class="img-responsive" src="{{ asset_url }}" alt="FreeLancelot - podróże freelancera" />
-                        {% endimage %}
+                {% if loop.last == false %}
+                    <div class="separator">
+                        <div class="mask"></div>
                     </div>
+                {% endif %}
 
-                    <div class="col-md-6 col-md-pull-6 project_desc">
-                        <h3>FreeLancelot.pl - projekt podróżniczy</h3>
-                        <p>Strona FreeLancelot.pl to projekt blogowy o podróżach, niezależności oraz spełnianiu marzeń. Strona stworzona w całości przeze mnie od projektu graficznego aż do stworzenia autorskiego szablonu WordPress. Dodatkowo wdrożyłem kilka własnych plugin-ów. Ponadto jestem administratorem oraz odpowiadam za dalszy rozwój projektu.</p>
-                        <ul>
-                            <li>HTML 5</li>
-                            <li>SCSS</li>
-                            <li>jQuery</li>
-                            <li>Bootstrap</li>
-                            <li>PHP</li>
-                            <li>Wordpress - tworzenie motywów</li>
-                            <li>Administracja</li>
-                            <li>SEO</li>
-                            <li>Photoshop</li>
-                        </ul>
-                        <a class="button" href="http://freelancelot.pl" target="_blank" >Zobacz projekt</a>
-                    </div>
-                </div>
+                {% endfor %}
 
-                <div class="separator">
-                    <div class="mask"></div>
-                </div>
-
-                <!--PROJEKT III-->
-                <div class="row row3">
-                    <div class="col-md-6 parallax_left computer">
-                        {% image 'bundles/portfolio/img/elektromaniak.jpg' %}
-                            <img class="img-responsive" src="{{ asset_url }}" alt="Projekt Elektromaniak.pl" />
-                        {% endimage %}
-                    </div>
-
-                    <div class="col-md-6 project_desc">
-                        <h3>Elektromaniak - sklep dla elektroników</h3>
-                        <p>Sklep Elektromaniak.pl to serwis dla pasjonatów elektroniki. System został oparty o platformę PrestaShop. Odpowiadam za dostosowanie szablonu pod wymagania klienta oraz całą konfigurację serwisu. Zaimplementowałem również system blogowy oraz forum. Dodatkowo wykonałem migrację danych (produkty, klienci, zamówienia itp.) ze starego sklepu klienta.</p>
-                        <ul>
-                            <li>HTML 5</li>
-                            <li>CSS 3</li>
-                            <li>JavaScript</li>
-                            <li>SQL</li>
-                            <li>E-commerce</li>
-                            <li>PrestaShop</li>
-                        </ul>
-                        <a class="button" href="http://elektromaniak.pl/" target="_blank">Zobacz projekt</a>
-                    </div>
-                </div>
-
-                <div class="separator">
-                    <div class="mask"></div>
-                </div>
-
-                <!--PROJEKT IV-->
-                <div class="row row4">
-                    <div class="col-md-6 col-md-push-6 parallax_right computer">
-                        {% image 'bundles/portfolio/img/bwhs_mocaps.jpg' %}
-                            <img class="img-responsive" src="{{ asset_url }}" alt="Kancelaria Prawnicza BWHS" />
-                        {% endimage %}
-                    </div>
-
-                    <div class="col-md-6 col-md-pull-6 project_desc">
-                        <h3>BWHS - Kancelaria adwokacka</h3>
-                        <p>Strona BWHS to projekt stworzony dla kancelarii prawniczej. Całość oparta o system WordPress. Moim zadaniem było dostosowanie szablonu pod projekt graficzny dostarczony przez firmę web-bespokers.com. Dodatkowo również wykonałem wielojęzyczność serwisu oraz przeniesienie całej treści ze starej strony klienta.</p>
-                        <ul>
-                            <li>HTML5</li>
-                            <li>CSS3</li>
-                            <li>jQuery</li>
-                            <li>Bootstrap</li>
-                            <li>Wordpress</li>
-                            <li>Genesis framework</li>
-                            <li>Wielojęzyczność</li>
-                        </ul>
-                        <a class="button" href="http://www.robertsaternus.esy.es/bwhs-master/" target="_blank" >Zobacz projekt</a>
-                    </div>
-                </div>
-
-                <div class="separator">
-                    <div class="mask"></div>
-                </div>
-
-                <!--PROJEKT V-->
-                <div class="row row5">
-                    <div class="col-md-6 parallax_left computer">
-                        {% image 'bundles/portfolio/img/gosbud_mocaps.jpg' %}
-                            <img class="img-responsive" src="{{ asset_url }}" alt="Firma budowlana - GOS-BUD" />
-                        {% endimage %}
-                    </div>
-
-                    <div class="col-md-6 project_desc">
-                        <h3>Firma budowlana GOS-BUD</h3>
-                        <p>Projekt zrealizowany dla firmy budowlanej Gos-Bud z Sulejowa. Strona jest oparta o system zarządzania treścią Wordpress, co pozwala właścicielom strony na łatwą modyfikację treści oraz dodawanie nowych realizacji budowlanych do portfolia na stronie. Projekt bazujący na gotowym szablonie. Moim zadaniem było zaprojektować stronę oraz zmodyfikować szablon pod wymagania klienta.</p>
-                        <ul>
-                            <li>HTML5</li>
-                            <li>CSS3</li>
-                            <li>JavaScript</li>
-                            <li>Wordpress</li>
-                            <li>Photoshop</li>
-                        </ul>
-                        <a class="button" href="http://gos-bud.com.pl/" target="_blank" >Zobacz projekt</a>
-                    </div>
-                </div>
 
                 <a class="button bigger" href="{{ path('portfolio_projects') }}">Zobacz więcej moich realizacji</a>
 
@@ -294,7 +189,7 @@
                 <div class="col-lg-8 col-md-6 col-sm-5 hidden-xs"></div>
                 <div class="col-lg-4 col-md-6 col-sm-7 col-xs-12">
                     <h2>Zapraszam do współpracy</h2>
-                    <p>Jako wolny strzelec, nie muszący opłacać biura czy pracowników, oferuję bardzo konkurencyjne ceny. Specjalizuję się w <span> systemie Wodpress (tworzenie szablonów, pluginów)</span>. Wykunuję praktycznie każdy rodzaj stron:<span> wizytówki firm, sklepy internetowe, blogi, portfolia</span> oraz <span>aplikacje webowe.</span> </p>
+                    <p>Jako wolny strzelec, nie muszący opłacać biura czy pracowników, oferuję bardzo konkurencyjne ceny. Specjalizuję się w <span> systemie Wodpress (tworzenie szablonów, pluginów) oraz framework-u Symfony.</span>. Wykonuję praktycznie każdy rodzaj stron:<span> wizytówki firm, sklepy internetowe, blogi, portfolia</span> oraz <span>aplikacje webowe.</span> </p>
                 </div>
             </div>
         </div>
