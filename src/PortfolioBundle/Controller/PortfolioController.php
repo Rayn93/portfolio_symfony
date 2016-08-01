@@ -53,11 +53,16 @@ class PortfolioController extends Controller
         $query = $qb->getQuery();
         $projects = $query->getResult();
 
+        $CategoryRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Category');
+        $AllCategory = $CategoryRepo->findAll();
+
 
         return array(
             'projects' => $projects,
             'title' => 'Projekty i realizacje',
-            'category_select' => true
+            'all_projects' => 'WSZYSTKIE',
+            'category_search' => true,
+            'all_category' => $AllCategory
         );
     }
 
@@ -113,11 +118,17 @@ class PortfolioController extends Controller
         $query = $qb->getQuery();
         $projects = $query->getResult();
 
+        $CategoryRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Category');
+        $CurrentCategory = $CategoryRepo->findOneBy(array('slug'=>$slug));
+        $AllCategory = $CategoryRepo->findAll();
+
 
         return array(
             'projects' => $projects,
-            'title' => sprintf("Projekty z kategorii: <span class=\"highlight\">%s</span>", $Tag->getName()),
-            'category_select' => true
+            'title' => sprintf("Projekty z kategorii: <span class=\"highlight\">%s</span>", $CurrentCategory->getName()),
+            'current_category' => $CurrentCategory,
+            'category_search' => true,
+            'all_category' => $AllCategory
         );
     }
 }

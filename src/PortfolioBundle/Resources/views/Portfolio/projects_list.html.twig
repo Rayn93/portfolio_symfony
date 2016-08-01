@@ -63,16 +63,21 @@
             <div class="col-xs-12">
                 <h1>{{ title|raw }}</h1>
 
-                {% if category_select is defined  %}
-                    <select name="category_list">
-                        <option value="{{ path('portfolio_projects') }}">WSZYSTKIE</option>
-                        <option>SKLEPY INTERNETOWE</option>
-                        <option>STRONY WIZYTÓWKI</option>
-                        <option>BLOGI</option>
-                        <option>WORDPRESS</option>
-                        <option>CIĘCIE SZABLONÓW</option>
-                        <option>WŁASNE PROJEKTY</option>
-                    </select>
+                {% if category_search  is defined  %}
+                    <div class="dropdown">
+                        {% if all_projects is defined  %}
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ all_projects }}
+                        {% elseif current_category is defined  %}
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ current_category.name }}
+                        {% endif %}
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('portfolio_projects') }}">WSZYSTKIE</a></li>
+                            {% for category in all_category %}
+                                <li><a href="{{ path('portfolio_projects_categories', {'slug': category.slug}) }}">{{ category.name|upper }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
 
                 {% endif %}
             </div>
