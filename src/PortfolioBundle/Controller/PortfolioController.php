@@ -20,11 +20,12 @@ class PortfolioController extends Controller
         $ProjectRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Project');
 
         $qb = $ProjectRepo->getQueryBuilder(array(
-            'home' => 'home'
+            'home' => 'home',
+            'orderBy' => 'p.publishedDate',
+            'orderDir' => 'DESC'
         ));
 
         $query = $qb->getQuery();
-
         $projects = $query->getResult();
 
 
@@ -36,14 +37,87 @@ class PortfolioController extends Controller
     /**
      * @Route(
      *      "/projekty/",
-     *      name="portfolio_projects"
+     *       name="portfolio_projects"
      * )
-     * @Template()
+     * @Template("PortfolioBundle:Portfolio:projects_list.html.twig")
      */
     public function projectsAction()
     {
-        return array(
+        $ProjectRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Project');
 
+        $qb = $ProjectRepo->getQueryBuilder(array(
+            'orderBy' => 'p.publishedDate',
+            'orderDir' => 'DESC'
+        ));
+
+        $query = $qb->getQuery();
+        $projects = $query->getResult();
+
+
+        return array(
+            'projects' => $projects,
+            'title' => 'Projekty i realizacje',
+            'category_select' => true
+        );
+    }
+
+    /**
+     * @Route(
+     *      "/tag/{slug}",
+     *      name="portfolio_projects_tags"
+     * )
+     * @Template("PortfolioBundle:Portfolio:projects_list.html.twig")
+     */
+    public function tagsAction($slug)
+    {
+        $ProjectRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Project');
+
+        $qb = $ProjectRepo->getQueryBuilder(array(
+            'orderBy' => 'p.publishedDate',
+            'orderDir' => 'DESC',
+            'tag' => $slug
+        ));
+
+        $query = $qb->getQuery();
+        $projects = $query->getResult();
+
+        $TagsRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Tags');
+        $Tag = $TagsRepo->findOneBy(array('slug' => $slug));
+        $TagsCloud = $TagsRepo->findAll();
+
+
+        return array(
+            'projects' => $projects,
+            'tag_cloud' => $TagsCloud,
+            'title' => sprintf("Projekty z tagiem: <span class=\"highlight\">%s</span>", $Tag->getName())
+        );
+    }
+
+    /**
+     * @Route(
+     *      "/kategoria/{slug}",
+     *       name="portfolio_projects_categories"
+     * )
+     * @Template("PortfolioBundle:Portfolio:projects_list.html.twig")
+     */
+    public function categoryAction($slug)
+    {
+        $ProjectRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Project');
+
+        $qb = $ProjectRepo->getQueryBuilder(array(
+            'orderBy' => 'p.publishedDate',
+            'orderDir' => 'DESC',
+            'category' => $slug
+        ));
+
+        $query = $qb->getQuery();
+        $projects = $query->getResult();
+
+
+        return array(
+            'projects' => $projects,
+            'title' => sprintf("Projekty z kategorii: <span class=\"highlight\">%s</span>", $Tag->getName()),
+            'category_select' => true
         );
     }
 }
