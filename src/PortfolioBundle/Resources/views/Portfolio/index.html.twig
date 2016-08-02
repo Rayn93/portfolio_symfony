@@ -205,26 +205,31 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-6">
-                    <form class="form-horizontal" method="post" action="index.php#kontakt">
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Imię i nazwisko" value="">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Twój adres e-mail" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <textarea class="form-control" rows="4" name="wiadomosc" placeholder="Treść wiadomości"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <input id="submit" name="submit" type="submit" value="WYŚLIJ" class="btn btn-primary">
-                            </div>
-                        </div>
 
-                        <input type="hidden" name="checker" value="1" />
-                    </form>
+                    {{ form_start(contactForm) }}
+                    {{ form_widget(contactForm) }}
+                    {{ form_end(contactForm) }}
+
+                    {#<form class="form-horizontal" method="post" action="index.php#kontakt">#}
+                        {#<div class="form-group">#}
+                            {#<div class="col-sm-12">#}
+                                {#<input type="text" class="form-control" id="name" name="name" placeholder="Imię i nazwisko" value="">#}
+                                {#<input type="email" class="form-control" id="email" name="email" placeholder="Twój adres e-mail" value="">#}
+                            {#</div>#}
+                        {#</div>#}
+                        {#<div class="form-group">#}
+                            {#<div class="col-sm-12">#}
+                                {#<textarea class="form-control" rows="4" name="wiadomosc" placeholder="Treść wiadomości"></textarea>#}
+                            {#</div>#}
+                        {#</div>#}
+                        {#<div class="form-group">#}
+                            {#<div class="col-sm-12">#}
+                                {#<input id="submit" name="submit" type="submit" value="WYŚLIJ" class="btn btn-primary">#}
+                            {#</div>#}
+                        {#</div>#}
+
+                        {#<input type="hidden" name="checker" value="1" />#}
+                    {#</form>#}
                 </div>
             </div>
         </div>
