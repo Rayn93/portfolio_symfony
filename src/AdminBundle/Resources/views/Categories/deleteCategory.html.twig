@@ -1,0 +1,42 @@
+{% extends 'AdminBundle::base.html.twig' %}
+
+{% block pageTitle %}Usuń Kategorie{% endblock %}
+
+{% block adminContent %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Usuwanie kategorii "Promy kosmiczne"
+                    </div>
+                    <div class="panel-body">
+                        <form action="#" method="post" class="form-horizontal" role="form">
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label required" for="new-category">Wybierz nową kategorię dla postów</label>
+                                <div class="col-lg-9">
+                                    <select id="new-category" class="select-block select2-offscreen">
+                                        <option value="" selected="selected">Wybierz kategorię</option>
+                                        <option value="6">Samoloty osobowe i pasażerskie</option>
+                                        <option value="7">Samoloty odrzutowe</option>
+                                        <option value="8">Samoloty wojskowe</option>
+                                        <option value="10">Tajne rozwiązania</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-offset-3">
+                                <div class="checkbox"><label><input type="checkbox" id="blog_category_delete_set_null" name="blog_category_delete[set_null]" required="required" value="1"> Ustaw wszystkie posty bez kategorii</label></div>
+                            </div>
+
+                            <button class="btn btn-primary pull-right">Usuń kategorię</button>
+                        </form>
+                    </div>
+                </div> <!-- .panel -->
+            </div> <!-- .col-md-12 -->
+        </div> <!-- .row -->
+    </div> <!-- .container -->
+
+{% endblock %}

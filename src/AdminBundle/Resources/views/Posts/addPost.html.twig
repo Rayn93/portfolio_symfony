@@ -1,0 +1,131 @@
+{% extends 'AdminBundle::base.html.twig' %}
+
+{% block pageTitle %}Dodaj Post{% endblock %}
+
+{% block adminContent %}
+
+    <div class="container">
+        <form action="#" method="post" class="form-horizontal" role="form">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Dodawanie nowego wpisu / Edycja wpisu "Lorem ipsum dolor sit amet."
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group has-error">
+                                <label for="title" class="col-lg-1 control-label">Tytul:</label>
+                                <div class="col-lg-11">
+                                    <input type="text" class="form-control" id="title" placeholder="Tytul">
+                                    <p class="help-block">Uzupełnij to pole.</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="alias" class="col-lg-1 control-label">Alias:</label>
+                                <div class="col-lg-11">
+                                    <input type="text" class="form-control" id="alias" placeholder="Alias">
+                                </div>
+                            </div>
+                            <div class="form-group wysiwyg has-error">
+                                <textarea class="form-control summernote" name="content" id="content"></textarea>
+                                <p class="help-block">Uzupełnij to pole.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- .col-md-8 -->
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Akcje
+                                </div>
+                                <div class="panel-body">
+                                    <button class="btn btn-success">Zapisz</button>
+                                </div>
+                            </div>
+                        </div> <!-- .col-md-12 -->
+
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Miniaturka
+                                </div>
+                                <div class="panel-body">
+                                    <!-- <p><img src="..." alt="..." class="img-thumbnail"></p> -->
+                                    <p>Brak miniaturki</p>
+                                    <input type="file" name="thumbnail">
+                                </div>
+                            </div>
+                        </div> <!-- .col-md-12 -->
+
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Właściwości
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="col-lg-5 required">Data publikacji</label>
+                                        <div class="col-lg-7">
+                                            <div>
+                                                <input type="date" id="date" name="date" class="form-control">
+                                                <input type="time" id="time" name="time" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-5">Home Page</label>
+                                        <div class="col-lg-7">
+                                            <div>
+                                                <input type="checkbox" id="date" name="date" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Taksonomie
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="category" class="col-lg-3 control-label">Kategoria:</label>
+                                        <div class="col-lg-9">
+                                            <select id="category" class="select-block" placeholder="Kategoria">
+                                                <option>Development</option>
+                                                <option>Front-end</option>
+                                                <option>Back-end</option>
+                                                <option>Mobile</option>
+                                                <option>Design</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="tags" class="col-lg-3 control-label">Tagi:</label>
+                                        <div class="col-lg-9">
+                                            <select id="tags" class="select-block" placeholder="Tagi" multiple>
+                                                <option>iOS</option>
+                                                <option>Android</option>
+                                                <option>Windows8</option>
+                                                <option>Bada</option>
+                                                <option>Samsung</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- .col-md-12 -->
+
+                    </div>
+                </div>  <!-- .col-md-4 -->
+            </div> <!-- .row -->
+        </form>
+    </div> <!-- .container -->
+
+{% endblock %}
