@@ -5,10 +5,9 @@ namespace PortfolioBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+use PortfolioBundle\Form\Type\ContactFormType;
+
 
 class PortfolioController extends Controller
 {
@@ -35,13 +34,7 @@ class PortfolioController extends Controller
 
         //Rendering a contact form
 
-        $contactForm = $this->createFormBuilder()
-                ->add('name', TextType::class)
-                ->add('email', EmailType::class)
-                ->add('massage', TextareaType::class)
-                ->add('save', SubmitType::class, array('label' => 'WYŚLIJ'))
-                ->getForm();
-
+        $contactForm = $this->createForm(ContactFormType::class);
 
 
         return array(
