@@ -1,0 +1,39 @@
+{% extends 'AdminBundle::base.html.twig' %}
+
+{% block pageTitle %}Dodaj tag{% endblock %}
+
+{% block adminContent %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Dodawanie / Edycja tagu "iOS"
+                    </div>
+                    <div class="panel-body">
+                        <form action="#" method="post" class="form-horizontal" role="form">
+                            <div class="form-group has-error">
+                                <label for="name" class="col-lg-1 control-label">Nazwa:</label>
+                                <div class="col-lg-11">
+                                    <input type="text" class="form-control" id="name" placeholder="Nazwa">
+                                    <p class="help-block">To pole nie może być puste</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="alias" class="col-lg-1 control-label">Alias:</label>
+                                <div class="col-lg-11">
+                                    <input type="text" class="form-control" id="alias" placeholder="Alias">
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary pull-right">Zapisz</button>
+                        </form>
+                    </div>
+                </div> <!-- .panel -->
+            </div> <!-- .col-md-12 -->
+        </div> <!-- .row -->
+    </div> <!-- .container -->
+
+{% endblock %}

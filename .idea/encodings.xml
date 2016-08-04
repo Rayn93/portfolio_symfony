@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/AdminBundle/Resources/views/Categories/addCategory.html.twig" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/AdminBundle/Resources/views/Categories/deleteCategory.html.twig" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/AdminBundle/Resources/views/Categories/listCategory.html.twig" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/AdminBundle/Resources/views/Dashboard/index.html.twig" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/AdminBundle/Resources/views/Posts/addPost.html.twig" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/AdminBundle/Resources/views/Posts/listPost.html.twig" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/AdminBundle/Resources/views/addTaxonomy.html.twig" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/AdminBundle/Resources/views/Projects/addProject.html.twig" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/AdminBundle/Resources/views/Projects/listProject.html.twig" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/AdminBundle/Resources/views/Tags/addTag.html.twig" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/AdminBundle/Resources/views/Tags/listTag.html.twig" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/AdminBundle/Resources/views/base.html.twig" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/AdminBundle/Resources/views/listTaxonomy.html.twig" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/Controller/PortfolioController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/DataFixtures/ORM/CategoriesFixtures.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/DataFixtures/ORM/ProjectsFixtures.php" charset="UTF-8" />

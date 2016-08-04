@@ -1,6 +1,6 @@
 {% extends 'AdminBundle::base.html.twig' %}
 
-{% block pageTitle %}Lista {{ pageTitle }} {% endblock %}
+{% block pageTitle %}Lista Tagów {% endblock %}
 
 {% block adminContent %}
 
@@ -9,7 +9,7 @@
             <div class="col-md-12">
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">{{ pageTitle }}</div>
+                    <div class="panel-heading">Tagi</div>
                     <div class="panel-body">
 
                         <div class="table-responsive">
@@ -29,8 +29,8 @@
                                     <td>9</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-                                            <a href="#" class="btn btn-danger" data-confirmAction=""><span class="glyphicon glyphicon-trash"></span></a>
+                                            <a href="{{ path('addTag') }}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
+                                            <a href="{{ path('deleteTag') }}" class="btn btn-danger" data-confirmAction=""><span class="glyphicon glyphicon-trash"></span></a>
                                         </div>
                                     </td>
                                 </tr>

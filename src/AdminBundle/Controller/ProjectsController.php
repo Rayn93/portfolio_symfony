@@ -6,43 +6,42 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class CategoriesController extends Controller
+class ProjectsController extends Controller
 {
-
     /**
      * @Route(
-     *      "/lista-kategorii",
-     *      name="listCategory"
+     *      "/lista-projektow",
+     *      name="listProject"
      * )
      * @Template()
      */
-    public function listCategoryAction()
+    public function listProjectAction()
     {
         return array();
     }
 
+
     /**
      * @Route(
-     *      "/dodaj-kategorie",
-     *      name="addCategory"
+     *      "/dodaj-projekt",
+     *      name="addProject"
      * )
      * @Template()
      */
-    public function addCategoryAction()
+    public function addProjectAction()
     {
-        return array(
-
-        );
+        return array();
     }
 
+
     /**
      * @Route(
-     *      "/usun-kategorie",
-     *      name="deleteCategory"
+     *      "/usun-projekt",
+     *      name="deleteProject"
      * )
      * @Template()
      */
-    public function deleteCategoryAction()
+    public function deleteProjectAction()
     {
         return array();
     }

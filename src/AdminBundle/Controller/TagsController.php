@@ -13,12 +13,12 @@ class TagsController extends Controller
      *      "/lista-tagow",
      *      name="listTag"
      * )
-     * @Template("AdminBundle::listTaxonomy.html.twig")
+     * @Template()
      */
     public function listTagAction()
     {
         return array(
-            'pageTitle' => 'Tagi'
+
         );
     }
 
@@ -27,12 +27,30 @@ class TagsController extends Controller
      *      "/dodaj-tag",
      *      name="addTag"
      * )
-     * @Template("AdminBundle::addTaxonomy.html.twig")
+     * @Template()
      */
     public function addTagAction()
     {
         return array(
-            'pageTitle' => 'Tag'
+
+        );
+    }
+
+    /**
+     * @Route(
+     *      "/usun-tag",
+     *      name="deleteTag",
+     *      requirements={"id"="\d+"}
+     * )
+     *
+     * @Template()
+     */
+    public function deleteTagAction()
+    {
+
+
+        return array(
+
         );
     }
 
