@@ -3,6 +3,7 @@
 namespace PortfolioBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -18,7 +19,7 @@ class PortfolioController extends Controller
      * )
      * @Template()
      */
-    public function indexAction(){
+    public function indexAction(Request $request){
 
         //Rendering project with homePage = true
         $ProjectRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Project');
@@ -36,11 +37,67 @@ class PortfolioController extends Controller
 
         $contactForm = $this->createForm(ContactFormType::class);
 
+        if ($request->isMethod('POST')) {
+            $contactForm->handleRequest($request);
+
+            if ($contactForm->isValid()) {
+
+//                $message = \Swift_Message::newInstance()
+//                    ->setSubject('Wiadomość z robertsaternus.pl | Robert Saternus Portfolio web-developer-a')
+//                    ->setFrom($contactForm->getData()['email'])
+//                    ->setTo('robert.saternus@gmail.com')
+//                    ->setBody('Message goes here');
+//                        $this->renderView(
+//                            'PortfolioBundle:Mail:contactFormMail.html.twig',
+//                            array(
+//                                'name' => $contactForm->getData()['name'],
+//                                'message' => $contactForm->getData()['message']
+//                            )
+//                        )
+//                    );
+
+//                $this->get('mailer')->send($message);
+//
+//                $this->get('session')->getFlashBag()->add('success', 'Dziękuję! Twoja wiadomość została wysłana. Odpiszę tak szybko jak to tylko możliwe');
+//
+//                return $this->redirect($this->generateUrl('portfolio_main').'#kontakt');
+
+                $name = $contactForm->getData()['name'];
+
+               if($this->sendMail($name)){
+                   $this->get('session')->getFlashBag()->add('success', 'Dziękuję! Twoja wiadomość została wysłana. Odpiszę tak szybko jak to tylko możliwe');
+                   dump('Udało się wysłać');
+               }
+
+
+
+
+            }
+            else{
+                $this->get('session')->getFlashBag()->add('fail', 'Nie udało się wysłać wiadomości. Sprawdź wszystkie pola formularza. Wszystkie pola są wymagane');
+
+                return $this->redirect($this->generateUrl('portfolio_main').'#kontakt');
+
+            }
+        }
+
 
         return array(
             'projects' => $projects,
             'contactForm' => $contactForm->createView()
         );
+    }
+
+    private function sendMail($body)
+    {
+        $mail = \Swift_Message::newInstance()
+            ->setSubject('test mail')
+            ->setFrom('someone@somewhere.com')
+            ->setTo('3n1r4r+6wphw4wogrfs0@sharklasers.com')
+            ->setBody('message body goes here ' . $body)
+        ;
+
+        $this->get('mailer')->send($mail);
     }
 
     /**
@@ -140,4 +197,5 @@ class PortfolioController extends Controller
             'all_category' => $AllCategory
         );
     }
+
 }

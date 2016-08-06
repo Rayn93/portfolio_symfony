@@ -14,6 +14,7 @@
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/DataFixtures/ORM/CategoriesFixtures.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/DataFixtures/ORM/ProjectsFixtures.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/DataFixtures/ORM/TagsFixtures.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/PortfolioBundle/Form/Type/ContactFormType.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/Resources/views/Portfolio/index.html.twig" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/Resources/views/Portfolio/projects_list.html.twig" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/Resources/views/base.html.twig" charset="UTF-8" />
