@@ -42,62 +42,24 @@ class PortfolioController extends Controller
 
             if ($contactForm->isValid()) {
 
-//                $message = \Swift_Message::newInstance()
-//                    ->setSubject('Wiadomość z robertsaternus.pl | Robert Saternus Portfolio web-developer-a')
-//                    ->setFrom($contactForm->getData()['email'])
-//                    ->setTo('robert.saternus@gmail.com')
-//                    ->setBody('Message goes here');
-//                        $this->renderView(
-//                            'PortfolioBundle:Mail:contactFormMail.html.twig',
-//                            array(
-//                                'name' => $contactForm->getData()['name'],
-//                                'message' => $contactForm->getData()['message']
-//                            )
-//                        )
-//                    );
-
-//                $this->get('mailer')->send($message);
-//
-//                $this->get('session')->getFlashBag()->add('success', 'Dziękuję! Twoja wiadomość została wysłana. Odpiszę tak szybko jak to tylko możliwe');
-//
-//                return $this->redirect($this->generateUrl('portfolio_main').'#kontakt');
-
                 $name = $contactForm->getData()['name'];
+                $email = $contactForm->getData()['email'];
+                $message = $contactForm->getData()['message'];
 
-               if($this->sendMail($name)){
-                   $this->get('session')->getFlashBag()->add('success', 'Dziękuję! Twoja wiadomość została wysłana. Odpiszę tak szybko jak to tylko możliwe');
-                   dump('Udało się wysłać');
-               }
-
-
-
-
+                $this->sendMails($name, $email, $message);
+                $this->get('session')->getFlashBag()->add('success', 'Dziękuję! Twoja wiadomość została wysłana. Odpiszę tak szybko jak to tylko możliwe');
+                //return $this->redirect($this->generateUrl('portfolio_main').'#kontakt');
             }
             else{
                 $this->get('session')->getFlashBag()->add('fail', 'Nie udało się wysłać wiadomości. Sprawdź wszystkie pola formularza. Wszystkie pola są wymagane');
-
                 return $this->redirect($this->generateUrl('portfolio_main').'#kontakt');
-
             }
         }
-
 
         return array(
             'projects' => $projects,
             'contactForm' => $contactForm->createView()
         );
-    }
-
-    private function sendMail($body)
-    {
-        $mail = \Swift_Message::newInstance()
-            ->setSubject('test mail')
-            ->setFrom('someone@somewhere.com')
-            ->setTo('3n1r4r+6wphw4wogrfs0@sharklasers.com')
-            ->setBody('message body goes here ' . $body)
-        ;
-
-        $this->get('mailer')->send($mail);
     }
 
     /**
@@ -196,6 +158,45 @@ class PortfolioController extends Controller
             'category_search' => true,
             'all_category' => $AllCategory
         );
+    }
+
+//Message from contact form for main page
+    private function sendMails($name, $email, $message)
+    {
+        $mailToMe = \Swift_Message::newInstance()
+            ->setSubject('Wiadomość ze strony robertsaternus.pl | Robert Saternus - Portfolio web-developer-a')
+            ->setFrom($email)
+            ->setTo('robert.saternus@gmail.com')
+            ->setBody(
+                $this->renderView(
+                    'PortfolioBundle:Mail:contactFormMail.html.twig',
+                    array(
+                        'name' => $name,
+                        'message' => $message
+                        )
+                ),
+                'text/html'
+            )
+        ;
+
+        $mailToVisitor = \Swift_Message::newInstance()
+            ->setSubject('Poprawne wysłanie mail-a | Portfolio Robert Saternus')
+            ->setFrom('robert.saternus@gmail.com')
+            ->setTo($email)
+            ->setBody(
+                $this->renderView(
+                    'PortfolioBundle:Mail:contactFormMailToVisitor.html.twig',
+                    array(
+                        'name' => $name,
+                        'email' => $email
+                    )
+                ),
+                'text/html'
+            )
+        ;
+
+        $this->get('mailer')->send($mailToMe);
+        $this->get('mailer')->send($mailToVisitor);
     }
 
 }
