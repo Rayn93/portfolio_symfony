@@ -17,7 +17,6 @@ class ProjectRepository extends EntityRepository{
             ->leftJoin('p.category', 'c')
             ->leftJoin('p.tags', 't');
 
-
         if(!empty($params['home'])){
             $qb ->where('p.homePage = :true')
                 ->setParameter('true', true);

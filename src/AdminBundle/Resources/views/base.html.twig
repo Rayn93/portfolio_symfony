@@ -38,10 +38,12 @@
 
     <div class="collapse navbar-collapse navbar-ex1-collapse">
 
+        {% set route = app.request.get('_route') %}
+
         <ul class="nav navbar-nav">
-            <li class="active"><a href="{{ path('dashboard') }}">Kokpit</a></li>
-            <li><a href="{{ path('listProject') }}">Projekty</a></li>
-            <li class="dropdown">
+            <li {% if route == 'dashboard' %} class="active"{% endif %}><a href="{{ path('dashboard') }}">Kokpit</a></li>
+            <li {% if route == 'listProject' or route == 'addProject' %} class="active"{% endif %}><a href="{{ path('listProject') }}">Projekty</a></li>
+            <li class="dropdown {% if route == 'listCategory' or  route == 'listTag' or route == 'addCategory' or route == 'deleteCategory' or route == 'deleteTag' or route == 'addTag' %}active{% endif %}">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Taksonomie <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="{{ path('listCategory') }}">Kategorie</a></li>

@@ -17,7 +17,16 @@ class ProjectsController extends Controller
      */
     public function listProjectAction()
     {
-        return array();
+        $ProjectRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Project');
+
+        $qb = $ProjectRepo->getQueryBuilder();
+
+        $query = $qb->getQuery();
+        $projects = $query->getResult();
+
+        return array(
+            'projects' => $projects
+        );
     }
 
 

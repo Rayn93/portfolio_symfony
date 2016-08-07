@@ -55,14 +55,8 @@
                     </div>
                     <div class="panel-body">
 
-                        <ul class="nav nav-pills pull-left">
-                            <li class="active"><a href="#">Wszystkie (123)</a></li>
-                            <li><a href="#">Opublikowane (100)</a></li>
-                            <li><a href="#">Nieopublikowane (23)</a></li>
-                        </ul>
-
                         <ul class="nav nav-pills pull-right">
-                            <li><a href="{{ path('addProject') }}">Dodaj nowy</a></li>
+                            <li><a class="btn btn-primary" href="{{ path('addProject') }}">Dodaj nowy</a></li>
                         </ul>
 
                         <div class="clearfix"></div>
@@ -76,24 +70,24 @@
                                     <th><a class="sortable sort-desc" href="#">Kategoria</a></th>
                                     <th>Tagi</th>
                                     <th><a class="sortable" href="#">Autor</a></th>
-                                    <th><a class="sortable" href="#">Data utworzenia</a></th>
                                     <th><a class="sortable" href="#">Data publikacji</a></th>
                                     <th>Akcje</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+
+                                {% for project in projects %}
                                 <tr>
-                                    <td>1</td>
-                                    <td><a href="#">Efekt Parallax na stronie WWW</a></td>
-                                    <td>Webdevelopment</td>
+                                    <td>{{ project.id }}</td>
+                                    <td><a href="#">{{ project.title }}</a></td>
+                                    <td>{{ project.category.name }}</td>
                                     <td>
-                                        <span class="label label-default">Default</span>
-                                        <span class="label label-primary">Primary</span>
-                                        <span class="label label-success">Success</span>
+                                        {% for tag in project.tags %}
+                                             <span class="label label-success">{{ tag.name }}</span>
+                                        {% endfor %}
                                     </td>
-                                    <td>Maciej Żukiewicz</td>
-                                    <td>15.10.2013, 14:23:12</td>
-                                    <td>15.10.2013, 14:23:12</td>
+                                    <td>Robert Saternus</td>
+                                    <td>{{ project.publishedDate|date('d-m-Y') }}</td>
                                     <td>
                                         <div class="btn-group">
                                             <a href="{{ path('addProject') }}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
@@ -101,139 +95,9 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="#">Efekt Parallax na stronie WWW</a></td>
-                                    <td>Webdevelopment</td>
-                                    <td>
-                                        <span class="label label-info">Info</span>
-                                        <span class="label label-warning">Warning</span>
-                                        <span class="label label-danger">Danger</span>
-                                    </td>
-                                    <td>Maciej Żukiewicz</td>
-                                    <td>15.10.2013, 14:23:12</td>
-                                    <td>15.10.2013, 14:23:12</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-                                            <a href="#" class="btn btn-danger" data-confirmAction=""><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="#">Efekt Parallax na stronie WWW</a></td>
-                                    <td>Webdevelopment</td>
-                                    <td>
-                                        <span class="label label-default">Default</span>
-                                        <span class="label label-primary">Primary</span>
-                                        <span class="label label-success">Success</span>
-                                    </td>
-                                    <td>Maciej Żukiewicz</td>
-                                    <td>15.10.2013, 14:23:12</td>
-                                    <td>15.10.2013, 14:23:12</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-                                            <a href="#" class="btn btn-danger" data-confirmAction=""><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="#">Efekt Parallax na stronie WWW</a></td>
-                                    <td>Webdevelopment</td>
-                                    <td>
-                                        <span class="label label-info">Info</span>
-                                        <span class="label label-warning">Warning</span>
-                                        <span class="label label-danger">Danger</span>
-                                    </td>
-                                    <td>Maciej Żukiewicz</td>
-                                    <td>15.10.2013, 14:23:12</td>
-                                    <td>15.10.2013, 14:23:12</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-                                            <a href="#" class="btn btn-danger" data-confirmAction=""><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="#">Efekt Parallax na stronie WWW</a></td>
-                                    <td>Webdevelopment</td>
-                                    <td>
-                                        <span class="label label-default">Default</span>
-                                        <span class="label label-primary">Primary</span>
-                                        <span class="label label-success">Success</span>
-                                    </td>
-                                    <td>Maciej Żukiewicz</td>
-                                    <td>15.10.2013, 14:23:12</td>
-                                    <td>15.10.2013, 14:23:12</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-                                            <a href="#" class="btn btn-danger" data-confirmAction=""><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="#">Efekt Parallax na stronie WWW</a></td>
-                                    <td>Webdevelopment</td>
-                                    <td>
-                                        <span class="label label-info">Info</span>
-                                        <span class="label label-warning">Warning</span>
-                                        <span class="label label-danger">Danger</span>
-                                    </td>
-                                    <td>Maciej Żukiewicz</td>
-                                    <td>15.10.2013, 14:23:12</td>
-                                    <td>15.10.2013, 14:23:12</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-                                            <a href="#" class="btn btn-danger" data-confirmAction=""><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="#">Efekt Parallax na stronie WWW</a></td>
-                                    <td>Webdevelopment</td>
-                                    <td>
-                                        <span class="label label-default">Default</span>
-                                        <span class="label label-primary">Primary</span>
-                                        <span class="label label-success">Success</span>
-                                    </td>
-                                    <td>Maciej Żukiewicz</td>
-                                    <td>15.10.2013, 14:23:12</td>
-                                    <td>15.10.2013, 14:23:12</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-                                            <a href="#" class="btn btn-danger" data-confirmAction=""><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="#">Efekt Parallax na stronie WWW</a></td>
-                                    <td>Webdevelopment</td>
-                                    <td>
-                                        <span class="label label-info">Info</span>
-                                        <span class="label label-warning">Warning</span>
-                                        <span class="label label-danger">Danger</span>
-                                    </td>
-                                    <td>Maciej Żukiewicz</td>
-                                    <td>15.10.2013, 14:23:12</td>
-                                    <td>15.10.2013, 14:23:12</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-                                            <a href="#" class="btn btn-danger" data-confirmAction=""><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                    </td>
-                                </tr>
+
+                                {% endfor %}
+
                                 </tbody>
                             </table>
                         </div>

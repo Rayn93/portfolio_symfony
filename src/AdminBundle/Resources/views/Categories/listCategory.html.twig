@@ -23,9 +23,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+
+                                {% for category in allCategory %}
+
                                 <tr>
-                                    <td>1</td>
-                                    <td><a href="#">iOS</a></td>
+                                    <td>{{ category.id }}</td>
+                                    <td><a href="#">{{ category.name }}</a></td>
                                     <td>9</td>
                                     <td>
                                         <div class="btn-group">
@@ -34,83 +37,9 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="#">iOS</a></td>
-                                    <td>9</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-                                            <a href="#" class="btn btn-danger" data-confirmAction=""><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="#">iOS</a></td>
-                                    <td>9</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-                                            <a href="#" class="btn btn-danger" data-confirmAction=""><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="#">iOS</a></td>
-                                    <td>9</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-                                            <a href="#" class="btn btn-danger" data-confirmAction=""><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="#">iOS</a></td>
-                                    <td>9</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-                                            <a href="#" class="btn btn-danger" data-confirmAction=""><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="#">iOS</a></td>
-                                    <td>9</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-                                            <a href="#" class="btn btn-danger" data-confirmAction=""><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="#">iOS</a></td>
-                                    <td>9</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-                                            <a href="#" class="btn btn-danger" data-confirmAction=""><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a href="#">iOS</a></td>
-                                    <td>9</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-                                            <a href="#" class="btn btn-danger" data-confirmAction=""><span class="glyphicon glyphicon-trash"></span></a>
-                                        </div>
-                                    </td>
-                                </tr>
+
+                                {% endfor %}
+
                                 </tbody>
                             </table>
                         </div>

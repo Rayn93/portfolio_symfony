@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use PortfolioBundle\Entity\Category;
+
 class CategoriesController extends Controller
 {
 
@@ -18,7 +20,12 @@ class CategoriesController extends Controller
      */
     public function listCategoryAction()
     {
-        return array();
+        $CategoryRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Category');
+        $AllCategory = $CategoryRepo->findAll();
+
+        return array(
+            'allCategory' => $AllCategory
+        );
     }
 
     /**

@@ -17,8 +17,11 @@ class TagsController extends Controller
      */
     public function listTagAction()
     {
-        return array(
+        $TagRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Tags');
+        $AllTags = $TagRepo->findAll();
 
+        return array(
+            'allTag' => $AllTags
         );
     }
 

@@ -30,6 +30,7 @@ class PortfolioController extends Controller
             'orderDir' => 'DESC'
         ));
 
+
         $query = $qb->getQuery();
         $projects = $query->getResult();
 
