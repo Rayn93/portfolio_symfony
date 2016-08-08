@@ -3,7 +3,9 @@
 namespace PortfolioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="PortfolioBundle\Repository\ProjectRepository")
@@ -21,21 +23,46 @@ class Project{
 
     /**
      * @ORM\Column(type="string", length=150, unique=true)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 150
+     * )
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=150, unique=true)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 150
+     * )
      */
     private $slug;
 
     /**
      * @ORM\Column(type="text")
+     *
+     * @Assert\NotBlank()
+     *
      */
     private $content;
 
     /**
      * @ORM\Column(type="string", length=100)
+     *
+     * @Assert\NotBlank()
+     *
+     * @Assert\Image(
+     *      minWidth = 600,
+     *      minHeight = 480,
+     *      maxWidth = 1920,
+     *      maxHeight = 1080,
+     *      maxSize = "1M"
+     * )
      */
     private $thumbnail;
 
@@ -58,11 +85,19 @@ class Project{
 
     /**
      * @ORM\Column(type="string", length=150)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 150
+     * )
      */
     private $link;
 
     /**
      * @ORM\Column(type="datetime")
+     *
+     * @Assert\DateTime()
      */
     private $publishedDate;
 

@@ -13,19 +13,17 @@
                         Wyszukiwanie i filtracja
                     </div>
                     <div class="panel-body">
-                        <form action="#" method="get" class="form-inline filter-search" role="form">
+                        <form action="#{{ path('listProject') }}" method="get" class="form-inline filter-search" role="form">
                             <div class="form-group">
-                                <input type="text" name="title" class="form-control" placeholder="Wyszukaj po tytule">
+                                <input type="text" name="titleLike" class="form-control" placeholder="Wyszukaj po tytule">
                             </div>
 
                             <div class="form-group">
                                 <select name="category" class="select-block" placeholder="Kategoria">
                                     <option></option>
-                                    <option value="dev">Development</option>
-                                    <option value="des">Design</option>
-                                    <option value="tech">Technologie</option>
-                                    <option value="mob">Mobilne</option>
-                                    <option value="games">Gry</option>
+                                    {% for category in categoryList %}
+                                        <option value="{{ category.id }}">{{ category.name }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
 
@@ -54,6 +52,10 @@
                         Posty
                     </div>
                     <div class="panel-body">
+
+                        <ul class="nav nav-pills pull-left">
+                            <li class="active">Wszystkie projekty: {{ projects.getTotalItemCount }}</li>
+                        </ul>
 
                         <ul class="nav nav-pills pull-right">
                             <li><a class="btn btn-primary" href="{{ path('addProject') }}">Dodaj nowy</a></li>
@@ -102,15 +104,8 @@
                             </table>
                         </div>
 
-                        <ul class="pagination pull-right">
-                            <li><a href="#">&laquo;</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
+                        {{ knp_pagination_render(projects, 'PortfolioBundle:Pagination:pagination.html.twig') }}
+
                     </div> <!-- .panel-body -->
                 </div> <!-- .panel -->
             </div> <!-- .col-md-12 -->

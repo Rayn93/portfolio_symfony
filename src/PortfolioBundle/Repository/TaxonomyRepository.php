@@ -21,4 +21,14 @@ class TaxonomyRepository extends EntityRepository{
 
     }
 
+    public function getAsArray(){
+
+        $qb = $this->createQueryBuilder('t')
+                    ->select('t.id', 't.name')
+                    ->getQuery()
+                    ->getArrayResult();
+
+        return $qb;
+    }
+
 }

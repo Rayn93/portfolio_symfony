@@ -12,6 +12,7 @@ use PortfolioBundle\Form\Type\ContactFormType;
 
 class PortfolioController extends Controller
 {
+
     /**
      * @Route(
      *      "/",
@@ -65,12 +66,14 @@ class PortfolioController extends Controller
 
     /**
      * @Route(
-     *      "/projekty/",
-     *       name="portfolio_projects"
+     *      "/projekty/{page}",
+     *       name="portfolio_projects",
+     *       requirements={"page"="\d+"},
+     *       defaults={"page"=1}
      * )
      * @Template("PortfolioBundle:Portfolio:projects_list.html.twig")
      */
-    public function projectsAction()
+    public function projectsAction($page)
     {
         $ProjectRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Project');
 
@@ -80,14 +83,18 @@ class PortfolioController extends Controller
         ));
 
         $query = $qb->getQuery();
-        $projects = $query->getResult();
+
+        $paginationLimit = $this->getParameter('portfolio.pagination_limit');
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($query, $page, $paginationLimit);
 
         $CategoryRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Category');
         $AllCategory = $CategoryRepo->findAll();
 
 
         return array(
-            'projects' => $projects,
+            'projects' => $pagination,
             'title' => 'Projekty i realizacje',
             'all_projects' => 'WSZYSTKIE',
             'category_search' => true,
@@ -97,12 +104,14 @@ class PortfolioController extends Controller
 
     /**
      * @Route(
-     *      "/tag/{slug}",
-     *      name="portfolio_projects_tags"
+     *      "/tag/{slug}/{page}",
+     *      name="portfolio_projects_tags",
+     *      requirements={"page"="\d+"},
+     *      defaults={"page"=1}
      * )
      * @Template("PortfolioBundle:Portfolio:projects_list.html.twig")
      */
-    public function tagsAction($slug)
+    public function tagsAction($slug, $page)
     {
         $ProjectRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Project');
 
@@ -113,7 +122,11 @@ class PortfolioController extends Controller
         ));
 
         $query = $qb->getQuery();
-        $projects = $query->getResult();
+
+        $paginationLimit = $this->getParameter('portfolio.pagination_limit');
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($query, $page, $paginationLimit);
 
         $TagsRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Tags');
         $Tag = $TagsRepo->findOneBy(array('slug' => $slug));
@@ -121,7 +134,7 @@ class PortfolioController extends Controller
 
 
         return array(
-            'projects' => $projects,
+            'projects' => $pagination,
             'tag_cloud' => $TagsCloud,
             'title' => sprintf("Projekty z tagiem: <span class=\"highlight\">%s</span>", $Tag->getName())
         );
@@ -129,12 +142,14 @@ class PortfolioController extends Controller
 
     /**
      * @Route(
-     *      "/kategoria/{slug}",
-     *       name="portfolio_projects_categories"
+     *      "/kategoria/{slug}/{page}",
+     *       name="portfolio_projects_categories",
+     *       requirements={"page"="\d+"},
+     *       defaults={"page"=1}
      * )
      * @Template("PortfolioBundle:Portfolio:projects_list.html.twig")
      */
-    public function categoryAction($slug)
+    public function categoryAction($slug, $page)
     {
         $ProjectRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Project');
 
@@ -145,7 +160,11 @@ class PortfolioController extends Controller
         ));
 
         $query = $qb->getQuery();
-        $projects = $query->getResult();
+
+        $paginationLimit = $this->getParameter('portfolio.pagination_limit');
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($query, $page, $paginationLimit);
 
         $CategoryRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Category');
         $CurrentCategory = $CategoryRepo->findOneBy(array('slug'=>$slug));
@@ -153,7 +172,7 @@ class PortfolioController extends Controller
 
 
         return array(
-            'projects' => $projects,
+            'projects' => $pagination,
             'title' => sprintf("Projekty z kategorii: <span class=\"highlight\">%s</span>", $CurrentCategory->getName()),
             'current_category' => $CurrentCategory,
             'category_search' => true,
@@ -161,7 +180,9 @@ class PortfolioController extends Controller
         );
     }
 
-//Message from contact form for main page
+//######################################################################################################
+
+    //Message from contact form for main page
     private function sendMails($name, $email, $message)
     {
         $mailToMe = \Swift_Message::newInstance()

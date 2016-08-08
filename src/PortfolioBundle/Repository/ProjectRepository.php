@@ -36,6 +36,17 @@ class ProjectRepository extends EntityRepository{
                 ->setParameter('category', $params['category']);
         }
 
+        if(!empty($params['titleLike'])){
+            $searchTitle = '%'.$params['titleLike'].'%';
+            $qb ->andWhere('p.title LIKE :searchTitle')
+                ->setParameter('searchTitle', $searchTitle);
+        }
+
+        if(!empty($params['categoryId'])){
+            $qb ->andWhere('c.id = :categoryid')
+                ->setParameter('categoryid', $params['categoryId']);
+        }
+
         return $qb;
     }
 
