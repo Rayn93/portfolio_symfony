@@ -45,7 +45,7 @@ class ProjectType extends AbstractType
                 )
             ))
             ->add('thumbnail', Type\FileType::class, array(
-                'label' => 'Miniaturka'
+                'label' => 'Miniaturka',
             ))
             ->add('publishedDate', Type\DateTimeType::class, array(
                 'label' => 'Data publikacji',
@@ -78,7 +78,14 @@ class ProjectType extends AbstractType
 
     public function getName()
     {
-        return 'contact';
+        return 'project';
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'PortfolioBundle\Entity\Project',
+        ));
     }
 
 }

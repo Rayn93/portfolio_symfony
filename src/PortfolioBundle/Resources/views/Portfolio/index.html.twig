@@ -152,7 +152,7 @@
                         {#{% image 'bundles/portfolio/img/pidsthailand.jpg' %}#}
                         {#<img class="img-responsive" src="{{ asset_url }}" alt="{{ project.title }}"/>#}
                         {#{% endimage %}#}
-                        <img class="img-responsive" src="{{ project.thumbnail }}" alt="{{ project.title }}"/>
+                        <img class="img-responsive" src="{{ asset('uploads/' ~ project.thumbnail)}}" alt="{{ project.title }}"/>
                     </div>
 
                     <div class="col-md-6 project_desc {{ cycle(["col-md-pull-6", ""], loop.index)}}">

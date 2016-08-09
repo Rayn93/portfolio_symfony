@@ -2,17 +2,20 @@
 {#{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}#}
 {% form_theme form 'AdminBundle:Form:form_template.html.twig' %}
 
-{% block pageTitle %}Dodaj Projekt{% endblock %}
+{% set pageTitle = project.id == null ? 'Dodawanie nowego projektu' : 'Edycja projektu "%s"'|format(project.title) %}
+
+{% block pageTitle %}{{ pageTitle }}{% endblock %}
 
 {% block adminContent %}
 
     <div class="container">
-        <form action="#" method="post" class="form-horizontal" role="form">
+        {#<form action="{{ path('addProject') }}" method="post" class="form-horizontal" role="form">#}
+        {{ form_start(form) }}
             <div class="row">
                 <div class="col-md-8">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Dodawanie nowego wpisu / Edycja wpisu "Lorem ipsum dolor sit amet."
+                            {{ pageTitle }}
                         </div>
                         <div class="panel-body">
                             {{ form_row(form.title) }}
@@ -41,12 +44,12 @@
                                 <div class="panel-heading">
                                     Miniaturka
                                 </div>
-                                <div class="panel-body">
-                                    {#{% if post.thumbnail is null %}#}
-                                        {#<p>Brak miniaturki</p>#}
-                                    {#{% else %}#}
-                                        {#<p><img src="{{ asset(post.thumbnail) }}" alt="" class="img-thumbnail"></p>#}
-                                    {#{% endif %}#}
+                                <div class="panel-body"
+                                    {% if project.thumbnail is null %}
+                                        <p>Brak miniaturki</p>
+                                    {% else %}
+                                        <p><img src="{{ asset(project.thumbnail)}}" alt="" class="img-thumbnail"></p>
+                                    {% endif %}
 
                                     {{ form_widget(form.thumbnail) }}
                                     {{ form_errors(form.thumbnail) }}
@@ -102,7 +105,8 @@
                     </div>
                 </div>  <!-- .col-md-4 -->
             </div> <!-- .row -->
-        </form>
+              {{ form_rest(form) }}
+        {{ form_end(form) }}
     </div> <!-- .container -->
 
     {{ form_start(form) }}

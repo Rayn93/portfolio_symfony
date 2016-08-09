@@ -11,8 +11,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @ORM\Entity(repositoryClass="PortfolioBundle\Repository\ProjectRepository")
  * @ORM\Table(name="project")
  * @ORM\HasLifecycleCallBacks
+ *
+ * @UniqueEntity(fields={"title"})
+ * @UniqueEntity(fields={"slug"})
  */
 class Project{
+
+    const DEFAULT_AVATAR = 'default-thumbnail.jpg';
+    const UPLOAD_DIR = 'uploads/';
 
     /**
      * @ORM\Column(type="integer")
@@ -56,15 +62,17 @@ class Project{
      *
      * @Assert\NotBlank()
      *
-     * @Assert\Image(
-     *      minWidth = 600,
-     *      minHeight = 480,
-     *      maxWidth = 1920,
-     *      maxHeight = 1080,
-     *      maxSize = "1M"
+     * @Assert\File(
+     *      maxSize="5242880",
+     *      mimeTypes = {
+     *          "image/png",
+     *          "image/jpeg",
+     *          "image/jpg",
+     *      }
      * )
      */
     private $thumbnail;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="projects")
@@ -194,6 +202,7 @@ class Project{
      */
     public function getThumbnail()
     {
+
         return $this->thumbnail;
     }
 
@@ -360,5 +369,10 @@ class Project{
         if($this->slug === NULL){
             $this->setSlug($this->getTitle());
         }
+
+        if(null == $this->publishedDate){
+            $this->publishedDate = new \DateTime();
+        }
     }
+
 }

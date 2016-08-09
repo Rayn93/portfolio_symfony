@@ -64,25 +64,30 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class="alert alert-success alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Sukces!</strong> Poprawnie zalogowałeś się do Panelu!
-            </div>
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>Sukces!</strong> {{ flashMessage }}
+                </div>
+            {% endfor %}
 
-            <div class="alert alert-info alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Info!</strong> Przed zapisaniem sprawdź poprawność danych!
-            </div>
+            {#<div class="alert alert-info alert-dismissable">#}
+                {#<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>#}
+                {#<strong>Info!</strong> Przed zapisaniem sprawdź poprawność danych!#}
+            {#</div>#}
 
-            <div class="alert alert-warning alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Uwaga!</strong> Popraw błędy formularza
-            </div>
+            {#<div class="alert alert-warning alert-dismissable">#}
+                {#<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>#}
+                {#<strong>Uwaga!</strong> Popraw błędy formularza#}
+            {#</div>#}
 
+            {% for flashMessage in app.session.flashbag.get('danger') %}
             <div class="alert alert-danger alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Błąd!</strong> Coś poszło straszliwie nie tak...
+                <strong>Błąd!</strong> {{ flashMessage }}
             </div>
+            {% endfor %}
+
         </div>
     </div>
 </div>
