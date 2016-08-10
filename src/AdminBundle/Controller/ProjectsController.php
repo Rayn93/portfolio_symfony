@@ -36,16 +36,22 @@ class ProjectsController extends Controller
         $query = $qb->getQuery();
 
         $paginationLimit = $this->getParameter('admin.pagination_limit');
+        $limits = array(2, 5, 10, 15);
+
+        $limit = $request->query->get('limit', $paginationLimit);
 
         $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate($query, $page, $paginationLimit);
+        $pagination = $paginator->paginate($query, $page, $limit);
 
         $categoryList = $this->getDoctrine()->getRepository('PortfolioBundle:Category')->getAsArray();
 
         return array(
             'projects' => $pagination,
             'categoryList' => $categoryList,
-            'queryParams' => $queryParams
+            'queryParams' => $queryParams,
+
+            'paginationLimit' => $limit,
+            'limits' => $limits
         );
     }
 

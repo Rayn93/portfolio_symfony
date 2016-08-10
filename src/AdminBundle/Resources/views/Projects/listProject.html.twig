@@ -13,7 +13,7 @@
                         Wyszukiwanie i filtracja
                     </div>
                     <div class="panel-body">
-                        <form action="#{{ path('listProject') }}" method="get" class="form-inline filter-search" role="form">
+                        <form action="{{ path('listProject') }}" method="get" class="form-inline filter-search" role="form">
                             <div class="form-group">
                                 <input type="text" name="titleLike" value="{{ queryParams['titleLike'] }}" class="form-control" placeholder="Wyszukaj po tytule">
                             </div>
@@ -22,7 +22,7 @@
                                 <select name="category" class="select-block" placeholder="Kategoria">
                                     <option></option>
                                     {% for category in categoryList %}
-                                        <option value="{{ category.id }}">{{ category.name }}</option>
+                                        <option {{ queryParams['categoryId']==category['id'] ? 'selected' : '' }} value="{{ category['id'] }}">{{ category['name'] }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -34,11 +34,11 @@
                             <div class="form-group pull-right limit">
                                 <label for="limit" class="col-lg-5 control-label">Wyników</label>
                                 <div class="col-lg-7">
+
                                     <select name="limit" class="select-block" id="limit" placeholder="Pokaż">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
+                                    {% for limit in limits %}
+                                        <option {{ paginationLimit == limit ? 'selected' : '' }} value="{{ limit }}">{{ limit }}</option>
+                                    {% endfor %}
                                     </select>
                                 </div>
                             </div>
