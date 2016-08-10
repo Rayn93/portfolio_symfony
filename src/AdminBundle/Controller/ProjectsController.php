@@ -44,7 +44,8 @@ class ProjectsController extends Controller
 
         return array(
             'projects' => $pagination,
-            'categoryList' => $categoryList
+            'categoryList' => $categoryList,
+            'queryParams' => $queryParams
         );
     }
 
@@ -75,7 +76,7 @@ class ProjectsController extends Controller
             $message = 'Poprawnie dodałeś nowy projekt do bazy';
             $this->get('session')->getFlashBag()->add('success', $message);
 
-            return $this->redirect($this->generateUrl('addProject', array('id' => $Project->getId())));
+            return $this->redirect($this->generateUrl('editProject', array('id' => $Project->getId())));
         }
 
         return array(
@@ -87,8 +88,8 @@ class ProjectsController extends Controller
 
     /**
      * @Route(
-     *      "/edutuj-projekt/{id}",
-     *      name="addProject",
+     *      "/edytuj-projekt/{id}",
+     *      name="editProject",
      *      requirements={"id"="\d+"},
      *      defaults={"id"=NULL}
      * )
@@ -100,14 +101,19 @@ class ProjectsController extends Controller
             new File($this->getParameter('upload_directory').'/'.$Project->getThumbnail())
         );
 
+        $oldFile =$Project->getThumbnail();
+
         $form = $this->createForm(ProjectType::class, $Project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            unlink($oldFile);
+
             $file = $Project->getThumbnail();
             $fileName = $this->get('app.thumbnail_uploader')->upload($file);
             $Project->setThumbnail($fileName);
+
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($Project);
@@ -116,7 +122,7 @@ class ProjectsController extends Controller
             $message = 'Poprawnie dokonałeś edycji projektu';
             $this->get('session')->getFlashBag()->add('success', $message);
 
-            return $this->redirect($this->generateUrl('addProject', array('id' => $Project->getId())));
+            return $this->redirect($this->generateUrl('editProject', array('id' => $Project->getId())));
         }
 
 
@@ -129,13 +135,26 @@ class ProjectsController extends Controller
 
     /**
      * @Route(
-     *      "/usun-projekt",
-     *      name="deleteProject"
+     *      "/usun-projekt/{id}",
+     *      name="deleteProject",
+     *      requirements={"id"="\d+"}
      * )
      * @Template()
      */
-    public function deleteProjectAction()
+    public function deleteProjectAction($id)
     {
-        return array();
+
+        $Project = $this->getDoctrine()->getRepository('PortfolioBundle:Project')->find($id);
+
+        $oldFile =$Project->getThumbnail();
+        unlink($this->getParameter('upload_directory').'/'.$oldFile);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($Project);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'Poprawnie usunięto projekt');
+
+        return $this->redirect($this->generateUrl('listProject'));
     }
 }

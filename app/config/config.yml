@@ -82,3 +82,7 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: PortfolioBundle\Entity\User
+
+knp_paginator:
+    template:
+        sortable: PortfolioBundle:Pagination:sortable_link.html.twig # sort link template

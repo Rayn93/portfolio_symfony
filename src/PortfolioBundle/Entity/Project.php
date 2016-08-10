@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\ExecutionContext;
 
 /**
  * @ORM\Entity(repositoryClass="PortfolioBundle\Repository\ProjectRepository")
@@ -59,8 +60,6 @@ class Project{
 
     /**
      * @ORM\Column(type="string", length=100)
-     *
-     * @Assert\NotBlank()
      *
      * @Assert\File(
      *      maxSize="5242880",
@@ -374,5 +373,6 @@ class Project{
             $this->publishedDate = new \DateTime();
         }
     }
+
 
 }
