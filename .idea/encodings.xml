@@ -2,7 +2,9 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/AdminBundle/Controller/ProjectsController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/AdminBundle/Controller/TagsController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/AdminBundle/Form/Type/ProjectType.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/AdminBundle/Form/Type/TaxonomyType.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/AdminBundle/Resources/views/Categories/addCategory.html.twig" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/AdminBundle/Resources/views/Categories/deleteCategory.html.twig" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/AdminBundle/Resources/views/Categories/listCategory.html.twig" charset="UTF-8" />

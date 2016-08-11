@@ -13,8 +13,8 @@ class TaxonomyRepository extends EntityRepository{
 
         $qb = $this->createQueryBuilder('t');
 
-        $qb->select('t, COUNT(p.id) as postsCount')
-            ->leftJoin('t.posts', 'p')
+        $qb->select('t, COUNT(p.id) as projectCount')
+            ->leftJoin('t.projects', 'p')
             ->groupBy('t.id');
 
         return $qb;

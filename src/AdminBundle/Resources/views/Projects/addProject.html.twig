@@ -43,7 +43,7 @@
                                 <div class="panel-heading">
                                     Miniaturka
                                 </div>
-                                <div class="panel-body"
+                                <div class="panel-body">
                                     {% if project.thumbnail is null %}
                                         <p>Brak miniaturki</p>
                                     {% else %}
@@ -107,9 +107,5 @@
               {{ form_rest(form) }}
         {{ form_end(form) }}
     </div> <!-- .container -->
-
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
 
 {% endblock %}

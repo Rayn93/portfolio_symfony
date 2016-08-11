@@ -2,59 +2,99 @@
 
 namespace AdminBundle\Controller;
 
+use AdminBundle\Form\Type\TaxonomyType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
+
+use PortfolioBundle\Entity\Tags;
+//use AdminBundle\Form\Type\TaxonomyType;
 
 class TagsController extends Controller
 {
     /**
      * @Route(
-     *      "/lista-tagow",
-     *      name="listTag"
+     *      "/lista-tagow/{page}",
+     *      name="listTag",
+     *      requirements={"page"="\d+"},
+     *      defaults={"page"=1}
      * )
      * @Template()
      */
-    public function listTagAction()
+    public function listTagAction($page)
     {
         $TagRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Tags');
-        $AllTags = $TagRepo->findAll();
+        $AllTags = $TagRepo->getQueryBuilder();
+
+        $paginationLimit = $this->getParameter('admin.pagination_limit');
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($AllTags, $page, $paginationLimit);
 
         return array(
-            'allTag' => $AllTags
+            'allTag' => $pagination
         );
     }
 
     /**
      * @Route(
-     *      "/dodaj-tag",
-     *      name="addTag"
+     *      "/dodaj-tag/{id}",
+     *      name="addTag",
+     *      requirements={"id"="\d+"},
+     *      defaults={"id"=NULL}
      * )
      * @Template()
      */
-    public function addTagAction()
+    public function addTagAction(Request $request, Tags $Tag = NULL )
     {
-        return array(
+        if($Tag === NULL){
+            $Tag = new Tags();
+            $newTag = true;
+        }
 
+        $form = $this->createForm(TaxonomyType::class, $Tag);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($Tag);
+            $em->flush();
+
+            $message = isset($newTag) ? 'Poprawnie dodałeś tag do bazy danych' : "Poprawnie dokonałeś edycji tagu";
+            $this->get('session')->getFlashBag()->add('success', $message);
+
+            return $this->redirect($this->generateUrl('addTag', array('id' => $Tag->getId())));
+        }
+
+
+        return array(
+            'form' => $form->createView(),
+            'tag' => $Tag
         );
     }
 
     /**
      * @Route(
-     *      "/usun-tag",
+     *      "/usun-tag/{id}",
      *      name="deleteTag",
      *      requirements={"id"="\d+"}
      * )
      *
      * @Template()
      */
-    public function deleteTagAction()
+    public function deleteTagAction($id)
     {
+        $deleteTag = $this->getDoctrine()->getRepository('PortfolioBundle:Tags')->find($id);
 
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($deleteTag);
+        $em->flush();
 
-        return array(
+        $this->get('session')->getFlashBag()->add('success', 'Poprawnie usunołeś tag');
 
-        );
+        return $this->redirect($this->generateUrl('listTag'));
     }
 
 

@@ -3,11 +3,14 @@
 namespace PortfolioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
  * @ORM\MappedSuperclass
  * @ORM\HasLifecycleCallBacks
+ * @UniqueEntity("name")
  */
 abstract class AbstractTaxonomy{
 
@@ -20,11 +23,23 @@ abstract class AbstractTaxonomy{
 
     /**
      * @ORM\Column(type="string", length=60, unique=true)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 60
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=60, unique=true)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 60
+     * )
      */
     private $slug;
 
