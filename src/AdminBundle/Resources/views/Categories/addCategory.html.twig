@@ -1,6 +1,9 @@
 {% extends 'AdminBundle::base.html.twig' %}
+{% form_theme form 'AdminBundle:Form:form_template.html.twig' %}
 
-{% block pageTitle %}Dodaj Kategorię{% endblock %}
+{% set pageTitle = category.id == null ? 'Dodawanie kategorii' : 'Edycja kategorii: %s'|format(category.name)  %}
+
+{% block pageTitle %} {{ pageTitle }}{% endblock %}
 
 {% block adminContent %}
 
@@ -9,27 +12,17 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Dodawanie / Edycja kategorii "iOS"
+                        {{ pageTitle }}
                     </div>
                     <div class="panel-body">
-                        <form action="#" method="post" class="form-horizontal" role="form">
-                            <div class="form-group has-error">
-                                <label for="name" class="col-lg-1 control-label">Nazwa:</label>
-                                <div class="col-lg-11">
-                                    <input type="text" class="form-control" id="name" placeholder="Nazwa">
-                                    <p class="help-block">To pole nie może być puste</p>
-                                </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="alias" class="col-lg-1 control-label">Alias:</label>
-                                <div class="col-lg-11">
-                                    <input type="text" class="form-control" id="alias" placeholder="Alias">
-                                </div>
-                            </div>
+                        {{ form_start(form) }}
+                        {{ form_row(form.name) }}
+                        {{ form_row(form.slug) }}
+                        {{ form_widget(form.save, {'attr': {'class': 'btn-success  pull-right'}}) }}
+                        {{ form_rest(form) }}
+                        {{ form_end(form) }}
 
-                            <button class="btn btn-primary pull-right">Zapisz</button>
-                        </form>
                     </div>
                 </div> <!-- .panel -->
             </div> <!-- .col-md-12 -->

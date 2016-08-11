@@ -50,4 +50,17 @@ class ProjectRepository extends EntityRepository{
         return $qb;
     }
 
+    public function moveToCategory($oldCategoryId, $newCategoryId) {
+        return $this->createQueryBuilder('p')
+            ->update()
+            ->set('p.category', ':newCategoryId')
+            ->where('p.category = :oldCategoryId')
+            ->setParameters(array(
+                'newCategoryId' => $newCategoryId,
+                'oldCategoryId' => $oldCategoryId
+            ))
+            ->getQuery()
+            ->execute();
+    }
+
 }

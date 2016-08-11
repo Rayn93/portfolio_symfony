@@ -2,14 +2,13 @@
 
 namespace AdminBundle\Controller;
 
-use AdminBundle\Form\Type\TaxonomyType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
 use PortfolioBundle\Entity\Tags;
-//use AdminBundle\Form\Type\TaxonomyType;
+use AdminBundle\Form\Type\TaxonomyType;
 
 class TagsController extends Controller
 {
