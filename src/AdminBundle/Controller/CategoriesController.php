@@ -84,38 +84,32 @@ class CategoriesController extends Controller
      * )
      * @Template()
      */
-    public function deleteCategoryAction(Request $request,Category $Category)
+    public function deleteCategoryAction(Request $request, $id)
     {
-//        $Category = $this->getDoctrine()->getRepository('PortfolioBundle:Category')->find($id);
+        $Category = $this->getDoctrine()->getRepository('PortfolioBundle:Category')->find($id);
 
         $form = $this->createForm(CategoryType::class);
         $form->handleRequest($request);
 
+
         if($form->isSubmitted() && $form->isValid()){
 
-            $chosen = false;
+//            dump($NewCategory);
 
-            if(null !== ($NewCategory = $form->get('category')->getData())){
-                $newCategoryId = $NewCategory->getId();
-                $chosen = true;
-            }
+            $NewCategory = $form->get('category')->getData();
+            $newCategoryId = $NewCategory->getId();
 
-            if($chosen){
-                $ProjectRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Project');
-                $modifiedPosts = $ProjectRepo->moveToCategory($Category->getId(), $newCategoryId);
 
-                $em = $this->getDoctrine()->getManager();
-                $em->remove($Category);
-                $em->flush();
+            $ProjectRepo = $this->getDoctrine()->getRepository('PortfolioBundle:Project');
+            $modifiedPosts = $ProjectRepo->moveToCategory($Category->getId(), $newCategoryId);
 
-                $this->get('session')->getFlashBag()->add('success', sprintf('Kategoria została usunięta. %d postów zostało zmodyfikowanych.', $modifiedPosts));
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($Category);
+            $em->flush();
 
-                return $this->redirect($this->generateUrl('listCategory'));
-            }
-            else{
-                $this->get('session')->getFlashBag()->add('danger', 'Musisz wybrać nową kategorię');
-            }
+            $this->get('session')->getFlashBag()->add('success', sprintf('Kategoria została usunięta. %d postów zostało zmodyfikowanych.', $modifiedPosts));
 
+            return $this->redirect($this->generateUrl('listCategory'));
 
 
         }
