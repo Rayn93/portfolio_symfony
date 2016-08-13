@@ -28,7 +28,8 @@ class ContactFormType extends AbstractType{
                 ),
                 'constraints' => array(
                     new Assert\NotBlank()
-                )
+                ),
+                'translation_domain' => 'messages'
             ))
             ->add('email', EmailType::class, array(
                 'attr' => array(

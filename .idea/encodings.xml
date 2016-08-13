@@ -23,6 +23,7 @@
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/DataFixtures/ORM/ProjectsFixtures.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/DataFixtures/ORM/TagsFixtures.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/Form/Type/ContactFormType.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/PortfolioBundle/Resources/translations/messages.pl.yml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/Resources/views/Mail/contactFormMail.html.twig" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/Resources/views/Mail/contactFormMailToVisitor.html.twig" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/Resources/views/Portfolio/index.html.twig" charset="UTF-8" />
