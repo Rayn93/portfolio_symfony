@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/Resources/TwigBundle/views/Exception/error404.html.twig" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Resources/TwigBundle/views/Exception/error500.html.twig" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/AdminBundle/Controller/CategoriesController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/AdminBundle/Controller/ProjectsController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/AdminBundle/Controller/TagsController.php" charset="UTF-8" />
