@@ -50,7 +50,7 @@ class PortfolioController extends Controller
 
                 $this->sendMails($name, $email, $message);
                 $this->get('session')->getFlashBag()->add('success', 'Dziękuję! Twoja wiadomość została wysłana. Odpiszę tak szybko jak to tylko możliwe');
-                //return $this->redirect($this->generateUrl('portfolio_main').'#kontakt');
+                return $this->redirect($this->generateUrl('portfolio_main').'#kontakt');
             }
             else{
                 $this->get('session')->getFlashBag()->add('fail', 'Nie udało się wysłać wiadomości. Sprawdź wszystkie pola formularza. Wszystkie pola są wymagane');

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Security/login.html.twig" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Resources/TwigBundle/views/Exception/error404.html.twig" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Resources/TwigBundle/views/Exception/error500.html.twig" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/AdminBundle/Controller/CategoriesController.php" charset="UTF-8" />
@@ -23,7 +24,6 @@
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/DataFixtures/ORM/ProjectsFixtures.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/DataFixtures/ORM/TagsFixtures.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/Form/Type/ContactFormType.php" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/PortfolioBundle/Resources/translations/messages.pl.yml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/Resources/views/Mail/contactFormMail.html.twig" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/Resources/views/Mail/contactFormMailToVisitor.html.twig" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/PortfolioBundle/Resources/views/Portfolio/index.html.twig" charset="UTF-8" />
