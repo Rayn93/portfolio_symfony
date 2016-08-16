@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use PortfolioBundle\Form\Type\ContactFormType;
+use PortfolioBundle\Form\Type\FreeFormType;
 
 
 class PortfolioController extends Controller
@@ -177,6 +178,73 @@ class PortfolioController extends Controller
             'current_category' => $CurrentCategory,
             'category_search' => true,
             'all_category' => $AllCategory
+        );
+    }
+
+    /**
+     * @Route(
+     *      "/bezplatna-wycena",
+     *       name="portfolio_free_form",
+     * )
+     * @Template()
+     */
+    public function freeFormAction(Request $request)
+    {
+        //Rendering a form
+
+        $freeForm = $this->createForm(FreeFormType::class);
+
+        if ($request->isMethod('POST')) {
+            $freeForm->handleRequest($request);
+
+            if ($freeForm->isValid()) {
+
+                $name = $freeForm->getData()['name'];
+                $email = $freeForm->getData()['email'];
+                $website = $freeForm->getData()['website'];
+                $bigwebsite = $freeForm->getData()['bigwebsite'];
+                $project = $freeForm->getData()['project'];
+                $rwd = $freeForm->getData()['rwd'];
+                $cms = $freeForm->getData()['cms'];
+                $lang = $freeForm->getData()['lang'];
+                $services = $freeForm->getData()['services'];
+                $text = $freeForm->getData()['text'];
+                $graphic = $freeForm->getData()['graphic'];
+                $message = $freeForm->getData()['message'];
+
+                $mailFreeForm = \Swift_Message::newInstance()
+                    ->setSubject('Nowa wycena projektu | Robert Saternus - Portfolio web-developer-a')
+                    ->setFrom($email)
+                    ->setTo('robert.saternus@gmail.com')
+                    ->setBody(
+                        $this->renderView(
+                            'PortfolioBundle:Mail:freeFormMail.html.twig',
+                            array(
+                                'name' => $name,
+                                'email' => $email,
+                                'website' => $website,
+                                'bigwebsite' => $bigwebsite,
+                                'project' => $project,
+                                'rwd' => $rwd,
+                                'cms' => $cms,
+                                'lang' => $lang,
+                                'services' => $services,
+                                'text' => $text,
+                                'graphic' => $graphic,
+                                'message' => $message,
+                            )
+                        ),
+                        'text/html'
+                    )
+                ;
+
+                $this->get('mailer')->send($mailFreeForm);
+                $this->get('session')->getFlashBag()->add('success', 'Dziękuję! Formularz z Twoimi informacjami został wysłany poprawnie. Niedługo wyślę moją propozycję projektu dla Ciebie.');
+            }
+        }
+
+        return array(
+            'freeForm' => $freeForm->createView()
         );
     }
 
